@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Exchaggle.ViewModels.Items.ItemBulletinViewModel>
+@using Exchaggle.Helpers
+<br />
+@if (ViewBag.Message != null)
+{
+    <div class="alert exchaggle-alert-light">
+        <div class="exchaggle-text-emphasis">Success:</div>
+        @ViewBag.Message
+    </div>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert exchaggle-alert-light">
+        <div class="exchaggle-text-emphasis">Error:</div>
+        @Html.Raw(ViewBag.ErrorMessage)
+    </div>
+}
+<div class="panel panel-exchaggle">
+    <div class="panel-heading">
+        <span class="span-block">My Items&nbsp;|</span>
+        <span class="span-block"><a href="@Url.Action("Wishlist", "Items")" class="exchaggle-text-link">Wishlist</a></span>
+    </div>
+    <table class="table">
+        <tfoot>
+            <tr>
+                <td>
+                    <a href="@Url.Action("Upload", "Items")" class="btn btn-block btn-exchaggle-secondary fluid-control">Add New</a>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            @if (Model != null)
+            {
+                if (Model.Count() > 0)
+                {
+                    foreach (var bulletin in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-5 col-sm-2">
+                                                @if (!string.IsNullOrWhiteSpace(bulletin.ImageSource))
+                                                {
+                                                    <img src="@bulletin.ImageSource" alt="No Image Available" class="exchaggle-image-bulletin-extra" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Content/Vectors/asset_no_image.svg" alt="No Image Available" class="exchaggle-image-bulletin-extra" />
+                                                }
+                                            </div>
+                                            <div class="col-xs-12 col-sm-10">
+                                                <span class="exchaggle-text-emphasis">@bulletin.Name</span>&nbsp;-&nbsp;<small class="span-block add-bottom">@bulletin.Caption</small>
+                                                <div class="visible-xs">@bulletin.Description.LimitText(100)</div>
+                                                <div class="hidden-xs">@bulletin.Description.LimitText(200)</div>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-3 add-bottom">
+                                                <a href="@Url.Action("Details", "Items", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-primary btn-block fluid-control">Details</a>
+                                            </div>
+                                            @if (bulletin.Status == 0)
+                                            {
+                                                <div class="col-xs-12 col-sm-3 add-bottom">
+                                                    <a href="@Url.Action("Edit", "Items", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control">Edit</a>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-3 add-bottom">
+                                                    <a href="@Url.Action("Delete", "Items", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control confirmation-delete-item">Delete</a>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-3 add-bottom">
+                                                    <a href="@Url.Action("UserOffers", "Trades", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control">Offers</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            You have no items available
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        You have no items available
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/common")
+}

@@ -1,0 +1,180 @@
+﻿@model Exchaggle.ViewModels.Items.UploadFormViewModel
+<br />
+@using (Html.BeginForm(Model.ReferenceAction, "Items", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            @if (Model.ReferenceId == 0)
+            {
+                <span>Upload</span>
+            }
+            else
+            {
+                <span>Edit</span>
+            }
+        </div>
+        <table class="table">
+            <tbody class="panel-canvas">
+                <tr style="border-bottom: 0px;">
+                    <td>
+                        @if (ViewBag.Collection != null)
+                        {
+                            <div class="alert exchaggle-alert-light">
+                                @foreach (var message in ViewBag.Collection)
+                                {
+                                    @message<br />
+                                }
+                            </div>
+                        }
+                        @Html.AntiForgeryToken()
+                        <div class="panel panel-exchaggle">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Title</label>
+                                            <small class="hidden-xs" style="display:inline-block;">(e.g. Mountain bike)</small>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group clear-bottom">
+                                            <label class="control-label">Caption</label>
+                                            <small class="hidden-xs" style="display:inline-block;">(e.g. Good condition, the best)</small>
+                                            @Html.EditorFor(model => model.Caption, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                                            @Html.ValidationMessageFor(model => model.Caption, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-exchaggle">
+                            <div class="panel-heading">
+                                Image Upload
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    @if (!string.IsNullOrWhiteSpace(Model.ImageString))
+                                    {
+                                        <div id="image-preview-section" class="col-xs-12 col-sm-8 col-md-6 add-bottom">
+                                            <img id="image-preview" src="@Model.ImageString" class="img-responsive exchaggle-image-preview" alt="Uploaded Image" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div id="image-preview-section" class="col-xs-12 col-sm-8 col-md-6 add-bottom" style="display:none;">
+                                            <img id="image-preview" src="#" class="img-responsive exchaggle-image-preview" alt="No Image" />
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <label class="btn btn-block btn-exchaggle-secondary add-bottom" for="image-uploader">
+                                            @Html.TextBoxFor(m => m.ImageUpload, new { @type = "file", @id = "image-uploader", @style = "display:none;" })
+                                            @Html.HiddenFor(x => x.ImageKeep, new { @id = "image-keep", @value = Model.ImageKeep })
+                                            Add Image
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        @if (Model.ImageKeep == 0)
+                                        {
+                                            <button type="button" id="image-remover" class="btn btn-block btn-exchaggle-secondary add-bottom disabled" style="cursor:default;">Remove Image</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" id="image-remover" class="btn btn-block btn-exchaggle-secondary add-bottom" style="cursor:default;">Remove Image</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-exchaggle clear-bottom">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Description</label>
+                                            <small class="hidden-xs" style="display:inline-block;">(Enter a brief description about what you are offering - DO NOT include your contact information)</small>
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "exchaggle-form-control form-control fluid-control", @rows = "8", @style = "height:250px;" })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Category&nbsp;</label>
+                                                    <small class="hidden-xs" style="display:inline-block;">The category of your uploaded item</small>
+                                                    @Html.DropDownListFor(model => model.ItemCategory, Model.CategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control", @data_ref = Model.ReferenceId, @onchange = "javascript:getSubcategories('ItemSubcategory',this.value);" })
+                                                    @Html.ValidationMessageFor(model => model.ItemCategory, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Subcategory&nbsp;</label>
+                                                    <small class="hidden-xs" style="display:inline-block;">The subcategory of your uploaded item</small>
+                                                    @Html.DropDownListFor(model => model.ItemSubcategory, Model.SubcategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control" })
+                                                    @Html.ValidationMessageFor(model => model.ItemSubcategory, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Trade Category&nbsp;</label>
+                                                    <small class="hidden-xs" style="display:inline-block;">The category of the item you want</small>
+                                                    @Html.DropDownListFor(model => model.TradeCategory, Model.CategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control", @data_ref = Model.ReferenceId, @onchange = "javascript:getSubcategories('TradeSubcategory', this.value);" })
+                                                    @Html.ValidationMessageFor(model => model.TradeCategory, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Trade Subcategory&nbsp;</label>
+                                                    <small class="hidden-xs" style="display:inline-block;">The subcategory of the item you want</small>
+                                                    @Html.DropDownListFor(model => model.TradeSubcategory, Model.SubcategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control" })
+                                                    @Html.ValidationMessageFor(model => model.TradeSubcategory, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <input type="submit" class="btn btn-block btn-exchaggle-primary fluid-control" value="@Model.ReferenceAction" />
+                    <div class="visible-xs"><br /></div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <a href="@Url.Action("Index","Items")" class="btn btn-block btn-exchaggle-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dropdowns")
+    @Scripts.Render("~/bundles/image")
+}

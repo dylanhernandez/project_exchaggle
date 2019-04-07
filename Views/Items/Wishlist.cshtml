@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Exchaggle.ViewModels.Items.ItemBulletinViewModel>
+@using Exchaggle.Helpers
+<br />
+<div class="panel panel-exchaggle">
+    <div class="panel-heading">
+        <span class="span-block"><a href="@Url.Action("Index", "Items")" class="exchaggle-text-link">My Items</a>&nbsp;|</span>
+        <span class="span-block">Wishlist</span>
+    </div>
+    <table class="table">
+        <tfoot>
+            <tr>
+                <td>
+                    <a href="@Url.Action("Index", "Search")" class="btn btn-block btn-exchaggle-secondary fluid-control">Search New</a>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            @if (Model != null)
+            {
+                if (Model.Count() > 0)
+                {
+                    foreach (var bulletin in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-5 col-sm-2">
+                                                @if (!string.IsNullOrWhiteSpace(bulletin.ImageSource))
+                                                {
+                                                    <img src="@bulletin.ImageSource" alt="No Image Available" class="exchaggle-image-bulletin-extra" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Content/Vectors/asset_no_image.svg" alt="No Image Available" class="exchaggle-image-bulletin-extra" />
+                                                }
+                                            </div>
+                                            <div class="col-xs-12 col-sm-10">
+                                                <span class="exchaggle-text-emphasis">@bulletin.Name</span>&nbsp;-&nbsp;<small class="add-bottom" style="display:inline-block">@bulletin.Caption</small>
+                                                <div class="visible-xs">@bulletin.Description.LimitText(100)</div>
+                                                <div class="hidden-xs">@bulletin.Description.LimitText(200)</div>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-3 add-bottom">
+                                                <a href="@Url.Action("Details", "Search", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-primary btn-block">Details</a>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3 add-bottom">
+                                                <a href="@Url.Action("MakeOffer", "Trades", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block">Make Offer</a>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3 add-bottom">
+                                                <a href="@Url.Action("RemoveFromWishlist","Items", new { reference = bulletin.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            You have no items available
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        You have no items available
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,141 @@
+﻿@model Exchaggle.ViewModels.Search.SearchResultsViewModel
+@using Exchaggle.Helpers
+<br />
+
+<div class="panel panel-exchaggle">
+    <div class="panel-heading">
+        Results
+    </div>
+    <table class="table">
+        <tfoot>
+            <tr>
+                <td>
+                    <a href="@Url.Action("Index", "Search")" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control">New Search</a>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+        @if (Model != null)
+        {
+            if (Model.Results != null)
+            {
+                foreach (var item in Model.Results)
+                {
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-9">
+                                    <div class="row">
+                                        <div class="col-xs-5 col-sm-2">
+                                            @if (!string.IsNullOrWhiteSpace(item.ImageSource))
+                                            {
+                                                <img src="@item.ImageSource" alt="No Image Available" class="exchaggle-image-bulletin" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/Vectors/asset_no_image.svg" alt="No Image Available" class="exchaggle-image-bulletin" />
+                                            }
+                                        </div>
+                                        <div class="col-xs-12 col-sm-10">
+                                            <span class="exchaggle-text-emphasis">@item.Name</span>&nbsp;-&nbsp;<small class="add-bottom" style="display:inline-block">@item.Caption</small>
+                                            <div class="visible-xs">@item.Description.LimitText(100)</div>
+                                            <div class="hidden-xs">@item.Description.LimitText(200)</div>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                    @if (item.IsYours == true)
+                                    {
+                                        <div class="row">
+                                            <div class="col-xs-12 add-bottom">
+                                                <div class="visible-xs"><br /></div>
+                                                <a href="@Url.Action("Details", "Items", new { reference = item.ItemId })" class="btn btn-xs btn-exchaggle-primary btn-block fluid-control">View</a>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <a href="@Url.Action("UserOffers", "Trades", new { reference = item.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control">View Offers</a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-xs-12 add-bottom">
+                                                <div class="visible-xs"><br /></div>
+                                                <a href="@Url.Action("Details", "Search", new { reference = item.ItemId })" class="btn btn-xs btn-exchaggle-primary btn-block fluid-control">View</a>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <a href="@Url.Action("MakeOffer", "Trades", new { reference = item.ItemId })" class="btn btn-xs btn-exchaggle-secondary btn-block fluid-control">Make Offer</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                @if (Model.Page > 0)
+                                {
+                                    <a href="@Url.Action("Result", "Search", new { reference = (Model.Page - 1) })" class="btn btn-xs btn-exchaggle-secondary btn-block">&lt;&nbsp;Prev</a>
+                                    <div class="visible-xs"><br /></div>
+                                }
+                                else
+                                {
+                                    <a href="#" class="btn btn-xs btn-exchaggle-secondary btn-block disabled" style="cursor:default">&lt;&nbsp;Prev</a>
+                                    <div class="visible-xs"><br /></div>
+                                }
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                @if (Model.Results.Count() < ConstHelper.CONST_PAGE_SIZE)
+                                {
+                                    <a href="#" class="btn btn-xs btn-exchaggle-secondary btn-block disabled" style="cursor:default">Next&nbsp;&gt;</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Result", "Search", new { reference = (Model.Page + 1) })" class="btn btn-xs btn-exchaggle-secondary btn-block">Next&nbsp;&gt;</a>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        No Results Found
+                    </td>
+                </tr>
+                if (Model.Page > 0)
+                {
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <a href="@Url.Action("Result", "Search", new { reference = (Model.Page - 1) })" class="btn btn-xs btn-exchaggle-secondary btn-block">&lt;&nbsp;Prev</a>
+                                    <div class="visible-xs"><br /></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <a href="#" class="btn btn-xs btn-exchaggle-secondary btn-block disabled" style="cursor:default">Next&nbsp;&gt;</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No Results Found
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

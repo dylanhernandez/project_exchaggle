@@ -1,0 +1,42 @@
+﻿@model Exchaggle.ViewModels.Common.ReportViewModel
+<br />
+@using (Html.BeginForm("Account", "Report"))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            Report User Account
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert exchaggle-alert-dark">
+                        You are reporting <strong>@Model.Username</strong>.<br /> 
+                        Enter the following purpose for this report into the textbox and then click submit.
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Enter Report Details:</label>
+                        @Html.EditorFor(model => model.ReportDetails, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                        @Html.ValidationMessageFor(model => model.ReportDetails, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ReferenceId, new { htmlAttributes = new { @value = Model.ReferenceId } })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-exchaggle">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <input type="submit" class="btn btn-block btn-exchaggle-primary fluid-control" value="Confirm" />
+                    <div class="visible-xs"><br /></div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-block btn-exchaggle-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

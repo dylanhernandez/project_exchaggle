@@ -1,0 +1,74 @@
+﻿@model Exchaggle.ViewModels.Common.ItemsDetailViewModel
+<br />
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert exchaggle-alert-light">
+        @ViewBag.ErrorMessage
+    </div>
+}
+else if (ViewBag.UpdateMessage != null)
+{
+    <div class="alert exchaggle-alert-light">
+        <span class="exchaggle-text-emphasis">Success</span><br />
+        @ViewBag.UpdateMessage
+    </div>
+}
+<div class="panel panel-exchaggle">
+    <div class="panel-heading panel-noborder">
+        Details
+    </div>
+    <table class="table">
+        <tfoot>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 add-bottom">
+                            @if (ViewBag.ReturnUrl != null)
+                            {
+                                <a href="@ViewBag.ReturnUrl" class="btn btn-block btn-exchaggle-primary">Back</a>
+                            }
+                            else if (Model.InWishList == true)
+                            {
+                                <a href="@Url.Action("Wishlist","Items")" class="btn btn-block btn-exchaggle-primary">Back</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index","Search")" class="btn btn-block btn-exchaggle-primary">Back</a>
+                            }
+                        </div>
+                        @if (Model.Status == 0)
+                        {
+                            <div class="col-xs-12 col-sm-4 add-bottom">
+                                <a href="@Url.Action("MakeOffer", "Trades", new { reference = Model.ItemId })" class="btn btn-block btn-exchaggle-secondary">Make Offer</a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 add-bottom">
+                                @if (Model.InWishList == true)
+                                {
+                                    <a href="@Url.Action("RemoveFromWishlist","Items", new { reference = Model.ItemId })" class="btn btn-block btn-exchaggle-secondary">Remove From Wishlist</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("AddToWishlist","Items", new { reference = Model.ItemId })" class="btn btn-block btn-exchaggle-secondary">Add To Wishlist</a>
+                                }
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody class="panel-canvas">
+            <tr style="border-bottom: 0px;">
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.Partial("~/Views/Shared/ItemDetailsLayout.cshtml", Model)
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/common")
+}

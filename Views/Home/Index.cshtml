@@ -1,0 +1,83 @@
+﻿@model Exchaggle.ViewModels.Home.DashboardViewModel
+<br />
+@if (ViewBag.Message != null)
+{
+    <div class="alert exchaggle-alert-light">
+        @ViewBag.Message
+    </div>
+}
+@if (Model != null)
+{
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            Dashboard
+        </div>
+        <div class="panel-body">
+            Hello, <span class="exchaggle-text-emphasis">@Model.Username</span> your updates are below!
+        </div>
+    </div>
+
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            Updates
+        </div>
+        <table class="table">
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-xs btn-block btn-exchaggle-secondary" onclick="javascript:setNotificationClear('notebody', 0)">Clear All</button>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody id="notebody">
+                @if (Model.Notifications != null)
+                {
+                    if (Model.Notifications.Count() > 0)
+                    {
+                        foreach (var n in Model.Notifications)
+                        {
+                            <tr id="noterow_@n.NotificationId">
+                                <td>
+                                    <small>@n.DateTime</small><br />
+                                    @n.Description
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                @if (n.Link.Parameter == "")
+                                                {
+                                                    <a href="@Url.Action(n.Link.Action, n.Link.Controller)" class="btn btn-block btn-xs btn-exchaggle-primary add-bottom">Details</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action(n.Link.Action, n.Link.Controller, new { reference = int.Parse(n.Link.Parameter) })" class="btn btn-block btn-xs btn-exchaggle-primary add-bottom">Details</a>
+                                                }
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <button type="button" class="btn btn-block btn-xs btn-exchaggle-secondary" onclick="javascript:setNotificationClear('noterow', @n.NotificationId)">Clear</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <small>No Available Notifications</small><br />
+                                You have no available notifications at this time.
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                }            
+            </tbody>
+        </table>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/ajax")
+}

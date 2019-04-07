@@ -1,0 +1,117 @@
+﻿@model Exchaggle.ViewModels.Search.SearchFormViewModel
+<br />
+@using (Html.BeginForm("Result", "Search"))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            Search
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        @Html.ValidationMessageFor(model => model.SearchQuery, "", new { @class = "exchaggle-text-attention" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.SearchQuery, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                            <span class="input-group-btn">
+                                <input type="submit" class="btn btn-exchaggle-primary hidden-xs" value="Search"/>
+                                <span class="btn btn-exchaggle-primary visible-xs" style="padding: .75em .75em;"><input type="submit" class="exchaggle-text-shrink exchaggle-nested-input" value="Search" /></span>
+                            </span>
+                        </div>
+                    </div>
+                    <a href="#advancedSearchPanel" class="btn btn-sm btn-exchaggle-link pull-right" data-toggle="collapse">Advanced Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="advancedSearchPanel" class="collapse">
+        <div class="panel panel-exchaggle">
+            <div class="panel-heading">
+                Advanced Search
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label clear-all">Search Category&nbsp;</label><br />
+                                    <small>The category of the item you are searching</small>
+                                    @Html.DropDownListFor(model => model.SearchCategory, Model.CategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control", @onchange = "javascript:getSubcategories('SearchSubcategory',this.value);" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label clear-all">Search Subcategory&nbsp;</label><br />
+                                    <small>The subcategory of the item you are searching</small>
+                                    @Html.DropDownListFor(model => model.SearchSubcategory, Model.SubcategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label clear-all">Trade Category&nbsp;</label><br />
+                                    <small>The category of your item that you are trading</small>
+                                    @Html.DropDownListFor(model => model.TradeCategory, Model.CategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control", @onchange = "javascript:getSubcategories('TradeSubcategory', this.value);" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label clear-all">Trade Subcategory&nbsp;</label><br />
+                                    <small>The subcategory of your item that you are trading</small>
+                                    @Html.DropDownListFor(model => model.TradeSubcategory, Model.SubcategoriesList, htmlAttributes: new { @class = "exchaggle-form-control form-control fluid-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.State, Model.StateList, htmlAttributes: new { @class = "exchaggle-form-control form-control" })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "exchaggle-text-attention" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "exchaggle-form-control form-control", @value = Model.City } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "exchaggle-text-attention" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input type="submit" class="btn btn-block btn-exchaggle-primary fluid-control" value="Search" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
+}

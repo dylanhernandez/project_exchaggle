@@ -1,0 +1,53 @@
+﻿@model Exchaggle.ViewModels.PasswordRecoveryViewModel
+<img src="~/Content/Vectors/logo_md_spl_1177FF.svg" class="img-responsive" style="margin: 30px auto;" />
+
+@using (Html.BeginForm("SecurityQuestions", "Account"))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-exchaggle">
+        <div class="panel-heading">
+            Password Reset
+        </div>
+        <div class="panel-body">
+            @if (ViewBag.Message != null)
+            {
+                <div class="col-xs-12">
+                    <div class="alert exchaggle-alert-light">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            }
+            <div class="col-xs-12">
+                @Html.ValidationSummary(true, "", new { @class = "exchaggle-text-attention" })
+                <div class="form-group">
+                    <label class="control-label">
+                        @if (Model.SecurityQuestionA != null)
+                        {
+                            @Model.SecurityQuestionA.ToString();
+                        }
+                    </label>
+                    @Html.EditorFor(model => model.SecurityAnswerA, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                    @Html.ValidationMessageFor(model => model.SecurityAnswerA, "", new { @class = "exchaggle-text-attention" })
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label class="control-label">
+                        @if (Model.SecurityQuestionB != null)
+                        {
+                            @Model.SecurityQuestionB.ToString();
+                        }
+                    </label>
+                    @Html.EditorFor(model => model.SecurityAnswerB, new { htmlAttributes = new { @class = "exchaggle-form-control form-control fluid-control" } })
+                    @Html.ValidationMessageFor(model => model.SecurityAnswerB, "", new { @class = "exchaggle-text-attention" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <input type="submit" value="Send" class="btn btn-block btn-exchaggle-primary fluid-control" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
