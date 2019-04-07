@@ -1,0 +1,39 @@
+﻿body, * {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    font-family: Arial, sans-serif;
+}
+
+.form-control:focus, 
+.form-control:active, 
+.form-control.active, 
+.form-control:focus:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+input, select, textarea {
+    max-width: 300px;
+}
+.table > thead > tr > th, 
+.table > tbody > tr > th, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > tbody > tr > td, 
+.table > tfoot > tr > td {
+    vertical-align: middle;
+    border-top: 0px;
+    padding: 20px;
+}
+.alert {
+    padding: 20px;
+}
+.navbar-fixed-top .navbar-collapse {
+    max-height:none;
+}

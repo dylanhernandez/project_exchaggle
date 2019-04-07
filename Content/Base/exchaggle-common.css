@@ -1,0 +1,455 @@
+﻿/*
+    ---------------------------------------------
+    | Colour Schemes:
+    ---------------------------------------------
+    | #001025 - Main Background
+    | #000914 - Navbar
+    | #1177ff - Logo, Button 1
+    | #004D9D - Form Control, Button 2
+    | #004180 - Panel Background
+    | #003E7C - Table Background
+    | #003976 - Dashed Border
+    | #003265 - Panel Background Dark
+    | #FFFFFF - Text Colour
+    ---------------------------------------------
+
+    ---------------------------------------------
+    | Common Controls
+    ---------------------------------------------
+*/
+.body-default {
+    padding-top: 65px;
+    padding-bottom: 20px;
+    background-color: #001025;
+    color: #fff;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+input.fluid-control,
+select.fluid-control,
+textarea.fluid-control {
+    max-width: none !important;
+}
+
+/*
+    ---------------------------------------------
+    | Margin & Display Classes
+    ---------------------------------------------
+*/
+.clear-all {
+    margin: 0;
+}
+
+.clear-bottom {
+    margin-bottom: 0;
+}
+
+.add-all {
+    margin: 5px;
+}
+
+.add-bottom {
+    margin-bottom: 5px;
+}
+
+.add-bottom-extra {
+    margin-bottom: 15px;
+}
+
+.add-top {
+    margin-bottom: 5px;
+}
+
+.span-block {
+    display:inline-block;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Custom Navigation Bar
+    ---------------------------------------------
+*/
+#exchaggle-nav-menu.navbar-default .navbar-brand {
+    color: rgba(119, 119, 119, 1);
+}
+
+#exchaggle-nav-menu.navbar-default {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #000914;
+    border-width: 0 !important;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-nav>li>a {
+    color: #FFFFFF; 
+    background-color: #000914;
+    line-height: 40px;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-nav>li>a:hover,
+#exchaggle-nav-menu.navbar-default .navbar-nav>li>a:focus {
+    color: #FFFFFF; 
+    background-color: #1177ff;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-toggle {
+    border-color: #1177ff;
+}
+#exchaggle-nav-menu.navbar-default .navbar-toggle:hover,
+#exchaggle-nav-menu.navbar-default .navbar-toggle:focus {
+    background-color: #1177ff;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #1177ff;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#exchaggle-nav-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #000914;
+}
+
+#exchaggle-nav-menu.navbar-default .navbar-collapse, 
+#exchaggle-nav-menu.navbar-default .navbar-form {
+    border-color: #000914;
+}
+
+#exchaggle-nav-menu.navbar-default.navbar-fixed-top .navbar-collapse .scroll, 
+#exchaggle-nav-menu.navbar-default.navbar-fixed-bottom .navbar-collapse .scroll {
+    height: auto;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Custom Button Primary
+    ---------------------------------------------
+*/
+.btn-exchaggle-primary {
+    background: #1177ff; 
+    border-color: #1177ff; 
+    color: #FFFFFF; 
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 0px; 
+    border-width: 2px;
+    padding: .75em 2em;
+}
+
+.btn-exchaggle-primary:hover {
+    border-color: #FFFFFF; 
+    color: #FFFFFF;
+}
+
+.btn-exchaggle-primary:focus {
+    background: #1177ff; 
+    border-color: #1177ff; 
+    color: #FFFFFF;
+}
+
+
+
+/*
+    ---------------------------------------------
+    | Exchaggle Custom Button Secondary
+    ---------------------------------------------
+*/
+.btn-exchaggle-secondary {
+    background: #004D9D; 
+    border-color: #004D9D; 
+    color: #FFFFFF; 
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 0px; 
+    border-width: 2px;
+    padding: .75em 2em;
+}
+
+.btn-exchaggle-secondary:hover {
+    border-color: #FFFFFF; 
+    color: #FFFFFF;
+}
+
+.btn-exchaggle-secondary:focus {
+    background: #004D9D; 
+    border-color: #004D9D; 
+    color: #FFFFFF;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Custom Button Link (Adjusted to Logo Blue)
+    ---------------------------------------------
+*/
+.btn-exchaggle-link {
+    background: rgba(255, 255, 255, 0); 
+    border-color: rgba(204, 204, 204, 0); 
+    color: #1177ff; 
+    border-radius: 0px; 
+    border-width: 0px;
+    text-decoration: none;
+    text-align: left;
+}
+
+.btn-exchaggle-link:hover {
+    background: rgba(235, 235, 235, 0); 
+    border-color: rgba(173, 173, 173, 0); 
+    color: #1177ff;
+    text-decoration: underline;
+}
+
+.btn-exchaggle-link:active, .btn-exchaggle-link:focus {
+    background: rgba(235, 235, 235, 0); 
+    border-color: rgba(173, 173, 173, 0); 
+    color: #1177ff;
+    text-decoration: underline;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Form Controls
+    ---------------------------------------------
+*/
+input.exchaggle-form-control,
+input.exchaggle-form-control:hover,
+select.exchaggle-form-control,
+select.exchaggle-form-control:hover {
+    background-color: #004D9D;
+    border-color: #004D9D;
+    font-weight: bold;
+    color: #fff;
+    resize: none;
+    height: 45px;
+}
+
+textarea.exchaggle-form-control,
+textarea.exchaggle-form-control:hover {
+    background-color: #004D9D;
+    border-color: #004D9D;
+    font-weight: bold;
+    color: #fff;
+    resize: none;
+}
+
+input.exchaggle-form-control:focus,
+input.exchaggle-form-control:active,
+select.exchaggle-form-control:focus,
+select.exchaggle-form-control:active,
+textarea.exchaggle-form-control:focus,
+textarea.exchaggle-form-control:active {
+    border-color: #fff;
+    border-width: 2px;
+}
+
+.exchaggle-nested-input,
+input.exchaggle-nested-input {
+    line-height: normal;
+    background: none;
+    border: none;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Panel Controls
+    ---------------------------------------------
+*/
+.panel-exchaggle,
+.panel.panel-exchaggle {
+    background-color: #004180;
+    border-color: #003976;
+}
+
+.panel-exchaggle > .panel-body {
+    padding: 30px;
+}
+
+.panel-exchaggle > .panel-heading {
+    padding: 20px 30px;
+    border-bottom: 2px dashed #003976;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.panel-exchaggle > .panel-footer {
+    padding: 20px;
+    border-top: 2px dashed #003976;
+    background-color: #004180;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.panel-noborder,
+.panel-exchaggle > .panel-heading.panel-noborder,
+.panel-exchaggle > .panel-footer.panel-noborder {
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.panel-exchaggle > table,
+.panel-exchaggle > table > tbody {
+    background-color: #003E7C;
+    border-color: #003976;
+}
+
+.panel-canvas,
+.panel-exchaggle > table > tbody.panel-canvas {
+    background-color: #003265;
+    border-color: #003976;
+}
+
+.panel-exchaggle > table > tbody > tr,
+.panel-exchaggle > table > tbody > td,
+.panel-exchaggle > table > tbody > th {
+    border-bottom: 2px dashed #003976;
+}
+
+.panel-exchaggle > table > thead,
+.panel-exchaggle > table > tfoot {
+    background-color: #004180;
+    border-color: #003976;
+}
+
+.panel-text-block {
+    height: 150px;
+    overflow-y: scroll;
+    background-color: #004180;
+    padding: 5px;
+    border: 1px solid #003976;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Text
+    ---------------------------------------------
+*/
+.exchaggle-text-attention {
+    color: #d8ab7d;
+}
+
+.exchaggle-text-emphasis {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.exchaggle-text-shrink {
+    font-size: x-small;
+}
+
+.exchaggle-text-link,
+.exchaggle-text-link:focus,
+.exchaggle-text-link:active {
+    color: #1177ff; 
+}
+
+.exchaggle-text-link:hover {
+    color: #fff;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Alerts
+    ---------------------------------------------
+*/
+.exchaggle-alert-dark {
+    background-color: #003265;
+    border-color: #003976;
+}
+
+.exchaggle-alert-light {
+    background-color: #004D9D;
+    border-color: #003976;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Images
+    ---------------------------------------------
+*/
+.exchaggle-image-bulletin,
+img.exchaggle-image-bulletin {
+    height:100px;
+    width:100px;
+    border: 2px solid #003265;
+    margin-bottom:15px;
+    object-fit: cover;
+}
+
+.exchaggle-image-bulletin-extra,
+img.exchaggle-image-bulletin-extra {
+    height:140px;
+    width:140px;
+    border: 2px solid #003265;
+    margin-bottom:15px;
+    object-fit: cover;
+}
+
+/*
+    ---------------------------------------------
+    | Exchaggle Responsive Text
+    ---------------------------------------------
+*/
+@media screen and (max-width: 480px) {
+    .btn-exchaggle-primary,
+    .btn-exchaggle-secondary,
+    .exchaggle-alert-light,
+    .exchaggle-alert-dark {
+        font-size: x-small;
+    }
+
+    .exchaggle-form-control,
+    input.exchaggle-form-control,
+    input.exchaggle-form-control:hover,
+    input.exchaggle-form-control:focus,
+    input.exchaggle-form-control:active,
+    select.exchaggle-form-control,
+    select.exchaggle-form-control:hover,
+    select.exchaggle-form-control:focus,
+    select.exchaggle-form-control:active,
+    textarea.exchaggle-form-control,
+    textarea.exchaggle-form-control:hover,
+    textarea.exchaggle-form-control:focus,
+    textarea.exchaggle-form-control:active {
+        font-size: x-small;
+        height: 34px;
+    }
+}
+@media screen and (max-height: 420px) {
+    #exchaggle-nav-menu.navbar-default .navbar-nav > li > a {
+        line-height: 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .exchaggle-image-bulletin,
+    img.exchaggle-image-bulletin {
+        height:65px;
+        width:65px;
+    }
+
+    .exchaggle-image-bulletin-extra,
+    img.exchaggle-image-bulletin-extra {
+        height:100px;
+        width:100px;
+    }
+}
+
+/*
+    ---------------------------------------------
+    | Image Controls
+    ---------------------------------------------
+    | - These classes and ids only apply to the image uploader in the upload form
+    | - Classes are meant to improve the flow of uploading images for the client
+    ---------------------------------------------
+*/
+
+.exchaggle-image-preview,
+img.exchaggle-image-preview {
+    border: 2px solid #003265;
+    margin-bottom: 15px;
+    max-height: 300px;
+    width: auto;
+}
